@@ -13,9 +13,13 @@ object DrawGame : JLabel() {
 
         g.color = Color.LIGHT_GRAY
         repeat(10) { x ->
-            repeat(18) { y -> g.drawRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE) }
+            repeat(18) { y ->
+                g.drawRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE)
+            }
         }
 
+        g.color = Color.BLACK
+        g.drawRect(0, 0, width - 1, height - 1)
 
         this.repaint()
     }
