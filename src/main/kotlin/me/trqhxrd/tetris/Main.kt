@@ -1,5 +1,7 @@
 package me.trqhxrd.tetris
 
-fun main() {
+import me.trqhxrd.tetris.ui.GUI
 
+fun main() {
+    GUI.init()
 }
