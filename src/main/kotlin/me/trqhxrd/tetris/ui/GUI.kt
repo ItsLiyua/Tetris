@@ -1,5 +1,6 @@
 package me.trqhxrd.tetris.ui
 
+import me.trqhxrd.tetris.game.BlockType
 import org.apache.logging.log4j.kotlin.Logging
 import javax.swing.JFrame
 
@@ -23,6 +24,8 @@ object GUI : Logging {
 
         jf.add(DrawGrid)
         jf.add(DrawPreview)
+
+        BlockType.values().forEach { this.logger.debug("${it.name}: ${it.state}") }
 
         jf.isVisible = true
         this.logger.debug("Created window.")

@@ -8,7 +8,7 @@ import java.awt.Graphics
 
 object DrawPreview : Draw(GRID_WIDTH_PIXEL + BOX_SIZE, BOX_SIZE, BOX_SIZE * 4, BOX_SIZE * 4) {
 
-    var block: Block?=null
+    var block: Block? = null
 
     override fun paintComponent(g: Graphics) {
         super.paintComponent(g)
