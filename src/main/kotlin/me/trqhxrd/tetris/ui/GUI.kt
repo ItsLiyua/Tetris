@@ -1,6 +1,7 @@
 package me.trqhxrd.tetris.ui
 
 import me.trqhxrd.tetris.game.BlockType
+import me.trqhxrd.tetris.ui.utils.FPS
 import org.apache.logging.log4j.kotlin.Logging
 import javax.swing.JFrame
 
