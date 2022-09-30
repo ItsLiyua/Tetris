@@ -7,18 +7,48 @@ import java.awt.Graphics2D
 
 class Block(
     val type: BlockType = BlockType.random(),
-    var x: Int = GUI.GRID_WIDTH / 2 - type.size / 2,
-    var y: Int = -2,
-    var rotation: Int = (0..3).random()
+    x: Int = GUI.GRID_WIDTH / 2 - type.size / 2,
+    y: Int = -2,
+    rotation: Int = (0..3).random()
 ) : Logging {
 
+    var x = x
+        set(value) {
+            if (value < field &&
+                CollisionHandler.checkCollideWall(this) != CollisionHandler.Wall.LEFT
+            ) field = value
+            else if (value > field &&
+                CollisionHandler.checkCollideWall(this) != CollisionHandler.Wall.RIGHT
+            ) field = value
+            else this.logger.debug("Block collided with wall")
+        }
+    var y = y
+        set(value) {
+            var b = false
+            if (CollisionHandler.checkCollideFloor(this)) {
+                this.logger.info("Block reached the bottom. Generating new block.")
+                b = true
+            } else if (CollisionHandler.checkCollideMap(this)) {
+                this.logger.info("Block collided with another block.")
+                b = true
+            } else field = value
+            if (b) {
+                Grid.saveBlock(this)
+                Grid.generateNewBlock()
+            }
+        }
+    var rotation = rotation
+        private set
+
     init {
-        this.logger.debug("Initialized new block with type=\"${this.type.name}\", x=${this.x}, y=${this.y}, rotation=${this.rotation}.")
+        this.logger.debug(
+            "Initialized new block with type=\"${this.type.name}\", x=${this.x}, " +
+                    "y=${this.y}, rotation=${this.rotation}."
+        )
     }
 
-    fun move(speedUp: Boolean = false) {
-        val speed = if (speedUp) 2 else 1
-        this.y += speed
+    fun move() {
+        this.y += 1
         // TODO: Add collision handler
     }
 
@@ -31,8 +61,19 @@ class Block(
     }
 
     fun rotate() {
+        if (CollisionHandler.checkCollideRotation(this)) {
+            this.logger.debug("Rotation not possible.")
+            return
+        }
         val old = this.rotation
         if (++this.rotation >= 4) this.rotation = 0
         this.logger.debug("Rotated block from $old to ${this.rotation}.")
     }
+
+    fun destroy() {
+        Grid.saveBlock(this)
+        Grid.generateNewBlock()
+    }
+
+    fun state() = this.type[this.rotation]
 }

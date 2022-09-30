@@ -1,23 +1,41 @@
 package me.trqhxrd.tetris.game
 
+import me.trqhxrd.tetris.ui.GUI.BOX_SIZE
 import org.apache.logging.log4j.kotlin.Logging
 import java.awt.Color
 import java.awt.Graphics2D
 
 object Grid : Logging {
-    private val map = mutableMapOf<Pair<Int, Int>, Color?>()
-    var activeBlock = Block()
+    val map = mutableMapOf<Pair<Int, Int>, Color?>()
+    lateinit var activeBlock: Block
     var speedUp = false
         set(value) {
             if (field != value) this.logger.debug("New speed-up state: $value")
             field = value
         }
 
-    fun tick() {
-        this.activeBlock.move(speedUp)
+    init {
+        this.generateNewBlock()
     }
 
+    fun tick() = this.activeBlock.move()
+
+
     fun draw(g: Graphics2D) {
+        this.map.forEach { (coords, color) ->
+            g.color = color
+            g.fillRect(coords.first * BOX_SIZE, coords.second * BOX_SIZE, BOX_SIZE, BOX_SIZE)
+        }
         this.activeBlock.draw(g)
+    }
+
+    fun generateNewBlock() {
+        this.activeBlock = Block()
+    }
+
+    fun saveBlock(block: Block) {
+        block.state().forEach {
+            this.map[block.x + it.first to block.y + it.second] = block.type.color
+        }
     }
 }

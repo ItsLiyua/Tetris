@@ -23,7 +23,7 @@ object KeyHandler : KeyListener {
 
     override fun keyReleased(e: KeyEvent) {
         when (e.keyCode) {
-            VK_W -> Grid.speedUp = false
+            VK_S -> Grid.speedUp = false
         }
     }
 }

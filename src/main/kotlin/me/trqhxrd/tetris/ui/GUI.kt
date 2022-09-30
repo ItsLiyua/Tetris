@@ -1,9 +1,7 @@
 package me.trqhxrd.tetris.ui
 
-import me.trqhxrd.tetris.game.BlockType
 import me.trqhxrd.tetris.io.KeyHandler
 import me.trqhxrd.tetris.threading.GameThread
-import me.trqhxrd.tetris.ui.utils.FPS
 import org.apache.logging.log4j.kotlin.Logging
 import java.awt.event.WindowEvent
 import java.awt.event.WindowListener
@@ -20,7 +18,7 @@ object GUI : Logging {
 
     fun init() {
         this.logger.debug("Creating window.")
-        jf.setSize(GRID_WIDTH_PIXEL + 200, GRID_HEIGHT_PIXEL)
+        jf.setSize(GRID_WIDTH_PIXEL + 200, GRID_HEIGHT_PIXEL + BOX_SIZE)
         jf.layout = null
         jf.setLocationRelativeTo(null)
         jf.isResizable = false

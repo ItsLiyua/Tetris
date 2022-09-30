@@ -64,6 +64,8 @@ enum class BlockType(val color: Color, val size: Int, vararg val states: Set<Pai
         buildShape("000011110"),
     );
 
+    operator fun get(index: Int) = this.states[index % this.states.size]
+
     companion object {
         fun random() = BlockType.values().random()
     }
