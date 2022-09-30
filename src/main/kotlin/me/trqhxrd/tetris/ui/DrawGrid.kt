@@ -14,14 +14,12 @@ import java.awt.RenderingHints
 object DrawGrid : Draw(0, 0, GRID_WIDTH_PIXEL, GRID_HEIGHT_PIXEL) {
     var grid: Grid? = null
 
-    val blocks = Array(4) { i -> Block(BlockType.J, y = i * 3 + 2, rotation = i) }
-
     override fun paintComponent(g: Graphics) {
         super.paintComponent(g)
 
         (g as Graphics2D).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF)
 
-        blocks.forEach { it.draw(g) }
+        Grid.draw(g)
 
         g.color = Color.LIGHT_GRAY
         for (x in 0 until GUI.GRID_WIDTH) {

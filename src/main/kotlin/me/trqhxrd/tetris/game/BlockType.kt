@@ -8,7 +8,7 @@ import kotlin.math.sqrt
 enum class BlockType(val color: Color, val size: Int, vararg val states: Set<Pair<Int, Int>>) {
 
     I(
-        Color.YELLOW,
+        Color.MAGENTA,
         4,
         buildShape("0100010001000100"),
         buildShape("0000111100000000"),
@@ -24,7 +24,7 @@ enum class BlockType(val color: Color, val size: Int, vararg val states: Set<Pai
         buildShape("000111001"),
     ),
     L(
-        Color.RED,
+        Color.CYAN,
         3,
         buildShape("010010011"),
         buildShape("001111000"),
@@ -32,7 +32,7 @@ enum class BlockType(val color: Color, val size: Int, vararg val states: Set<Pai
         buildShape("000111100")
     ),
     O(
-        Color.RED,
+        Color.YELLOW,
         2,
         buildShape("1111"),
         buildShape("1111"),
@@ -48,7 +48,7 @@ enum class BlockType(val color: Color, val size: Int, vararg val states: Set<Pai
         buildShape("100110010")
     ),
     T(
-        Color.RED,
+        Color.GREEN,
         3,
         buildShape("000111010"),
         buildShape("010110010"),
@@ -56,13 +56,17 @@ enum class BlockType(val color: Color, val size: Int, vararg val states: Set<Pai
         buildShape("010011010")
     ),
     Z(
-        Color.RED,
+        Color.BLUE,
         3,
         buildShape("000110011"),
         buildShape("000011110"),
         buildShape("000110011"),
         buildShape("000011110"),
     );
+
+    companion object {
+        fun random() = BlockType.values().random()
+    }
 }
 
 private object TypeUtils : Logging {
