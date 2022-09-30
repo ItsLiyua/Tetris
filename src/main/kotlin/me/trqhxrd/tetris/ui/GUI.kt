@@ -26,8 +26,6 @@ object GUI : Logging {
         jf.add(DrawGrid)
         jf.add(DrawPreview)
 
-        BlockType.values().forEach { this.logger.debug("${it.name}: ${it.state}") }
-
         jf.isVisible = true
         this.logger.debug("Created window.")
     }

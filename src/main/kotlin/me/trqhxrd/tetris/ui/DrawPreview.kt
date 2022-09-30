@@ -17,8 +17,12 @@ object DrawPreview : Draw(GRID_WIDTH_PIXEL + BOX_SIZE, BOX_SIZE, BOX_SIZE * 4, B
 
         (g as Graphics2D).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF)
 
-        g.color = Color.GREEN
-        g.fillRect(0, 0, this.width, this.height)
+        g.color = Color.LIGHT_GRAY
+        repeat(4) { x ->
+            repeat(4) { y ->
+                g.drawRect(x * BOX_SIZE, y * BOX_SIZE, BOX_SIZE, BOX_SIZE)
+            }
+        }
 
         this.repaint()
     }

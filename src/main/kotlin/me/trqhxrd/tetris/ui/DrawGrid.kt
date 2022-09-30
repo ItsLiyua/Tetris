@@ -1,6 +1,9 @@
 package me.trqhxrd.tetris.ui
 
+import me.trqhxrd.tetris.game.Block
+import me.trqhxrd.tetris.game.BlockType
 import me.trqhxrd.tetris.game.Grid
+import me.trqhxrd.tetris.ui.GUI.BOX_SIZE
 import me.trqhxrd.tetris.ui.GUI.GRID_HEIGHT_PIXEL
 import me.trqhxrd.tetris.ui.GUI.GRID_WIDTH_PIXEL
 import java.awt.Color
@@ -11,14 +14,21 @@ import java.awt.RenderingHints
 object DrawGrid : Draw(0, 0, GRID_WIDTH_PIXEL, GRID_HEIGHT_PIXEL) {
     var grid: Grid? = null
 
+    val blocks = Array(4) { i -> Block(BlockType.J, y = i * 3 + 2, rotation = i) }
 
     override fun paintComponent(g: Graphics) {
         super.paintComponent(g)
 
         (g as Graphics2D).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF)
 
-        g.color = Color.RED
-        g.fillRect(0, 0, this.width, this.height)
+        blocks.forEach { it.draw(g) }
+
+        g.color = Color.LIGHT_GRAY
+        for (x in 0 until GUI.GRID_WIDTH) {
+            for (y in 0 until GUI.GRID_HEIGHT) {
+                g.drawRect(x * BOX_SIZE, y * BOX_SIZE, BOX_SIZE, BOX_SIZE)
+            }
+        }
 
         this.repaint()
     }

@@ -11,7 +11,7 @@ abstract class Draw(x: Int, y: Int, width: Int, height: Int) : JLabel(), Logging
     private var renderIndex = 0L
 
     init {
-        this.setBounds(x, y, width, height)
+        this.setBounds(x, y, width + 1, height + 1)
         this.isVisible = true
     }
 
