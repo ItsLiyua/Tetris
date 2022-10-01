@@ -1,6 +1,7 @@
 package me.trqhxrd.tetris.ui
 
 import me.trqhxrd.tetris.game.Block
+import me.trqhxrd.tetris.game.Grid
 import me.trqhxrd.tetris.ui.GUI.BOX_SIZE
 import me.trqhxrd.tetris.ui.GUI.GRID_WIDTH_PIXEL
 import java.awt.Color
@@ -16,6 +17,8 @@ object DrawPreview : Draw(GRID_WIDTH_PIXEL + BOX_SIZE, BOX_SIZE, BOX_SIZE * 4, B
         super.paintComponent(g)
 
         (g as Graphics2D).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF)
+
+        Grid.nextBlock.drawPreview(g)
 
         g.color = Color.LIGHT_GRAY
         repeat(4) { x ->

@@ -14,12 +14,9 @@ class Block(
 
     var x = x
         set(value) {
-            if (value < field &&
-                CollisionHandler.checkCollideWall(this) != CollisionHandler.Wall.LEFT
-            ) field = value
-            else if (value > field &&
-                CollisionHandler.checkCollideWall(this) != CollisionHandler.Wall.RIGHT
-            ) field = value
+            if (value < field && CollisionHandler.checkCollideWall(this) != CollisionHandler.Wall.LEFT) field = value
+            else if (value > field && CollisionHandler.checkCollideWall(this) != CollisionHandler.Wall.RIGHT) field =
+                value
             else this.logger.debug("Block collided with wall")
         }
     var y = y
@@ -42,8 +39,7 @@ class Block(
 
     init {
         this.logger.debug(
-            "Initialized new block with type=\"${this.type.name}\", x=${this.x}, " +
-                    "y=${this.y}, rotation=${this.rotation}."
+            "Initialized new block with type=\"${this.type.name}\", x=${this.x}, " + "y=${this.y}, rotation=${this.rotation}."
         )
     }
 
@@ -56,7 +52,26 @@ class Block(
         g.color = this.type.color
         val state = this.type.states[this.rotation]
         state.forEach {
-            g.fillRect((this.x + it.first) * BOX_SIZE, (this.y + it.second) * BOX_SIZE, BOX_SIZE, BOX_SIZE)
+            g.fillRect(
+                (this.x + it.first) * BOX_SIZE,
+                (this.y + it.second) * BOX_SIZE,
+                BOX_SIZE,
+                BOX_SIZE
+            )
+        }
+    }
+
+    fun drawPreview(g: Graphics2D) {
+        g.color = this.type.color
+        val state = this.type.states[this.rotation]
+        val offset = if (this.type.size == 2) 1 else 0
+        state.forEach {
+            g.fillRect(
+                (it.first + offset) * BOX_SIZE,
+                (it.second + offset) * BOX_SIZE,
+                BOX_SIZE,
+                BOX_SIZE
+            )
         }
     }
 

@@ -8,6 +8,7 @@ import java.awt.Graphics2D
 object Grid : Logging {
     val map = mutableMapOf<Pair<Int, Int>, Color?>()
     lateinit var activeBlock: Block
+    lateinit var nextBlock: Block
     var speedUp = false
         set(value) {
             if (field != value) this.logger.debug("New speed-up state: $value")
@@ -30,7 +31,9 @@ object Grid : Logging {
     }
 
     fun generateNewBlock() {
-        this.activeBlock = Block()
+        if (this::nextBlock.isInitialized) this.activeBlock = this.nextBlock
+        else this.activeBlock = Block()
+        this.nextBlock = Block()
     }
 
     fun saveBlock(block: Block) {
