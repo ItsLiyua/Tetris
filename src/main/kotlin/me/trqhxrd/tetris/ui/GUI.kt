@@ -27,6 +27,7 @@ object GUI : Logging {
         jf.addKeyListener(KeyHandler)
         jf.requestFocus()
 
+        jf.add(DrawPause)
         jf.add(DrawGrid)
         jf.add(DrawPreview)
 

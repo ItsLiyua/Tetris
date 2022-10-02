@@ -1,6 +1,7 @@
 package me.trqhxrd.tetris.io
 
 import me.trqhxrd.tetris.game.Grid
+import me.trqhxrd.tetris.threading.GameThread
 import java.awt.event.KeyEvent
 import java.awt.event.KeyEvent.*
 import java.awt.event.KeyListener
@@ -15,9 +16,7 @@ object KeyHandler : KeyListener {
             VK_S -> Grid.speedUp = true
             VK_A -> Grid.activeBlock.x -= 1
             VK_D -> Grid.activeBlock.x += 1
-            VK_ESCAPE -> {
-                // TODO: Pause menu
-            }
+            VK_ESCAPE -> GameThread.isPaused = !GameThread.isPaused
         }
     }
 
